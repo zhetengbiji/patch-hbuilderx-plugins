@@ -51,7 +51,7 @@ async function patch () {
       }
       const cwd = path.join(pluginsPach, plugin)
       const pathDir = path.relative(cwd, pluginPatchsPath)
-      const child = spawn('patch-package', ['--patch-dir', pathDir], {
+      const child = spawn('node', [require.resolve('patch-package'), '--patch-dir', pathDir], {
         stdio: 'inherit',
         cwd
       })
