@@ -1,0 +1,27 @@
+{
+  "name": "patch-hbuilderx-plugins",
+  "version": "1.0.0",
+  "description": "patch-hbuilderx-plugins",
+  "main": "bin/index.js",
+  "scripts": {
+    "make": "node scripts/make",
+    "patch": "node scripts/patch"
+  },
+  "bin": {
+    "patch-hbuilderx-plugins": "bin/index.js"
+  },
+  "keywords": [
+    "hbuilderx"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-spawn": "^7.0.3",
+    "degit": "^2.8.4",
+    "minimist": "^1.2.6",
+    "patch-package": "^6.4.7"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
+  }
+}
