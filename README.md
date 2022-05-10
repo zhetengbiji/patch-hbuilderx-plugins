@@ -12,7 +12,7 @@ yarn init
 
 ```
 HBUILDERX_PLUGINS_DIR="..."
-HBUILDERX_PLUGINS_PATHES_DIR="..."
+HBUILDERX_PLUGINS_PATCHES_DIR="..."
 ```
 
 ## Making patches
