@@ -1,6 +1,6 @@
 {
   "name": "patch-hbuilderx-plugins",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "patch-hbuilderx-plugins",
   "main": "bin/index.js",
   "scripts": {

@@ -31,7 +31,8 @@ async function patch () {
 
   const release = fs.readFileSync(releasePath, { encoding: 'utf8' })
 
-  const version = release.match(/\d+.\d+.\d+.\d+/)
+  const resut = release.match(/\d+.\d+.\d+.\d+(-alpha)?/)
+  const version = resut && resut[0]
 
   console.log(`HBuilderX Version: ${version}`)
 
