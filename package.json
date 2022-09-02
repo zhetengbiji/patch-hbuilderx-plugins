@@ -1,6 +1,6 @@
 {
   "name": "patch-hbuilderx-plugins",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "patch-hbuilderx-plugins",
   "main": "bin/index.js",
   "scripts": {
@@ -18,6 +18,7 @@
   "dependencies": {
     "cross-spawn": "^7.0.3",
     "degit": "^2.8.4",
+    "del": "^6.1.1",
     "inquirer": "^8.2.2",
     "minimist": "^1.2.6",
     "patch-package": "^6.4.7"

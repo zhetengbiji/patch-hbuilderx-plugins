@@ -5,8 +5,7 @@ const argv = minimist(process.argv.slice(2))
 const inquirer = require('inquirer')
 const degit = require('degit')
 const spawn = require('cross-spawn')
-
-const CACHE_PATH = path.join(__dirname, '../.cache')
+const del = require('del')
 
 let hbuilderxPach = argv._[0]
 
@@ -26,6 +25,7 @@ async function patch () {
   }
 
   const pluginsPach = path.join(hbuilderxPach, 'plugins')
+  const cachePath = path.join(pluginsPach, '.patch-hbuilderx-plugins')
 
   const releasePath = path.join(hbuilderxPach, 'ReleaseNote.md')
 
@@ -40,27 +40,34 @@ async function patch () {
     cache: false,
     force: true
   })
-
-  emitter.clone(CACHE_PATH).then(() => {
-    console.log('Patches download success')
-    const plugins = fs.readdirSync(CACHE_PATH)
-    plugins.forEach(plugin => {
-      const pluginPatchsPath = path.join(CACHE_PATH, plugin)
-      const isDir = fs.statSync(pluginPatchsPath).isDirectory()
-      if (!isDir) {
-        return
-      }
-      const cwd = path.join(pluginsPach, plugin)
-      const pathDir = path.relative(cwd, pluginPatchsPath)
+  await emitter.clone(cachePath)
+  console.log('Patches download success')
+  const plugins = fs.readdirSync(cachePath)
+  for (let i = 0; i < plugins.length; i++) {
+    const plugin = plugins[i]
+    const pluginPatchsPath = path.join(cachePath, plugin)
+    const isDir = fs.statSync(pluginPatchsPath).isDirectory()
+    if (!isDir) {
+      continue
+    }
+    const cwd = path.join(pluginsPach, plugin)
+    const pathDir = path.relative(cwd, pluginPatchsPath)
+    await new Promise((resolve) => {
       const child = spawn('node', [require.resolve('patch-package'), '--patch-dir', pathDir], {
         stdio: 'inherit',
         cwd
       })
 
       child.on('error', error => console.error(error))
-      child.on('exit', () => console.log('Patch Done'))
+      child.on('exit', () => {
+        resolve()
+      })
     })
+  }
+  await del(cachePath, {
+    force: true
   })
+  console.log('Patch Done')
 }
 
 patch()
