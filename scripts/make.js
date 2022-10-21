@@ -16,7 +16,7 @@ console.log(`packageNames: ${packageNames}`)
 const cwd = path.join(HBUILDERX_PLUGINS_DIR, pluginName)
 const pathDir = path.relative(cwd, path.join(HBUILDERX_PLUGINS_PATCHES_DIR, pluginName))
 
-const child = spawn('patch-package', packageNames.concat(['--patch-dir', pathDir]), {
+const child = spawn('patch-package', packageNames.concat(['--exclude', '.DS_Store', '--patch-dir', pathDir]), {
   stdio: 'inherit',
   cwd
 })
