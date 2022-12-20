@@ -5,7 +5,7 @@
 1. install deps
 
 ```
-yarn init
+yarn
 ```
 
 2. create .env
